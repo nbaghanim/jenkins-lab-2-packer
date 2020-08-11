@@ -15,11 +15,6 @@ pipeline {
         TF_NAMESPACE="nuha"
         PROJECT_NAME="web-server"
     }
-  stages {
-    stage("build") {
-      packer build packer.json
-    }
-  }
   
   
 stages{	
