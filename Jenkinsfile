@@ -7,19 +7,14 @@ pipeline {
     
   }
   
-  options {
-        skipStagesAfterUnstable()
+    environment{
+        CREDS = credentials('aws_nuha_creds')
+        AWS_ACCESS_KEY_ID="${CREDS_USR}"
+        AWS_SECRET_ACCESS_KEY="${CREDS_PSW}"
+        OWNER= "nuha"
+        TF_NAMESPACE="nuha"
+        PROJECT_NAME="web-server"
     }
-  
-   parameters {
-    credentials(
-        credentialType: 'com.cloudbees.plugins.credentials.impl.UsernamePasswordCredentialsImpl',
-        defaultValue: '',
-        description: 'The credentials needed to deploy.',
-        name: 'aws_nuha_creds',
-        required: true
-    )
-}
   stages {
     stage("build") {
       packer build packer.json
